@@ -1,0 +1,21 @@
+id,createdAt,receiverId,senderId,message
+1,2021-11-25 12:18:57,2,1,Tempora aspernatur quaerat cumque necessitatibus.
+2,2021-11-25 15:26:33,3,2,Harum beatae explicabo.
+3,2021-11-25 21:55:29,1,3,Dolor amet et molestiae quaerat rerum minus iste enim odio.
+4,2021-11-26 03:09:45,1,4,Corrupti et eos omnis eveniet vitae pariatur error quo deserunt.
+5,2021-11-26 09:15:42,1,5,Quo distinctio sint blanditiis.
+6,2021-11-27 06:42:02,2,6,Eligendi cum impedit.
+7,2021-11-27 06:38:39,5,1,Omnis itaque vel architecto incidunt eaque.
+8,2021-11-27 07:16:37,6,2,Impedit eum distinctio minus nihil nisi.
+9,2021-11-27 12:38:30,1,3,Voluptatem occaecati consequatur pariatur quidem repellat.
+10,2021-11-27 21:11:57,3,1,Aut ut possimus fugiat atque.
+11,2021-11-28 09:52:46,3,2,Quia nesciunt voluptas tenetur.
+12,2021-11-29 16:46:39,1,3,Illo placeat ad quibusdam quo.
+13,2021-11-30 04:16:42,1,4,Et sit laborum exercitationem eveniet qui facilis esse velit et.
+14,2021-12-02 11:56:37,5,1,Soluta ratione dolore et.
+15,2021-12-03 14:56:08,1,2,Atque inventore maiores.
+16,2021-12-04 15:18:24,6,3,Ut quaerat fugit dolorem nulla tenetur.
+17,2021-12-04 18:56:24,6,4,Eum alias non iure ut consequuntur enim.
+18,2021-12-04 21:06:18,1,5,Ut et qui tempora quidem a molestias quia omnis.
+19,2021-12-05 04:27:18,1,6,Deserunt fugiat ut.
+20,2021-12-06 02:30:13,2,1,Labore sunt molestiae aperiam non delectus neque qui.
