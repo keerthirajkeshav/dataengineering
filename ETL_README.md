@@ -11,16 +11,16 @@
 #How To Use This
   1. Fill in the configurable parameters in the users.properties.
   2. Folder Structure is as follows,
-     <RepoName>/source/users.py
+     <RepoName>/source/
        --To keep the python scripts.
-     <RepoName>/source/dags/users_airflow_dags.py
-       --To keep airflow script for scheduling.
      <RepoName>/output/
        --To write the target files.
 
-  2. job_helper.py : This file has 'load_config' method that is used to load the specified config file.
-  3. Run pip install -r requirements.txt to install dependencies. we can add more dependencies in this file as well.
-  4. Run python3 users.py "L3"  (Syntax: python3 <scriptname> <env_variable>)
+  3. job_helper.py : This file has 'load_config' method that is used to load the specified config file.
+  4. Run pip install -r requirements.txt to install dependencies. we can add more dependencies in this file as well.
+  5. users.py : Main python script.
+  6. users_airflow_dags.py : airflow script for scheduling.
+  7. Run python3 users.py "L3"  (Syntax: python3 <scriptname> <env_variable>)
 
 #Log Details
   1. logging is implemented to capture the pipelines activities.
