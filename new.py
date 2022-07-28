@@ -1,4 +1,9 @@
-import  boto3
+import pyspark.sql.functions as func
+import pyspark.sql.types as type
+from pyspark.sql.functions import to_json, col, udf, from_json, explode, current_timestamp
+import re, boto3
+from boto3.session import Session
+from pyspark.sql.types import StructType, ArrayType, StructField, StringType, IntegerType
 from pyspark.sql import SparkSession
 from datetime import datetime, timedelta, timezone
 # Create spark session
@@ -8,9 +13,9 @@ hadoopConf.set("mapreduce.fileoutputcommitter.algorithm.version", "2")  # to av
 hadoopConf.set("mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
 hadoopConf.set("spark.hadoop.avro.mapred.ignore.inputs.without.extension", "false")
 hadoopConf.set("avro.mapred.ignore.inputs.without.extension", "false")
-src_bucket='<bucketname>'
-src_bucket_prefix='iss/'
-tgt_bucket='<bucketname>'
+src_bucket = '<>'
+src_bucket_prefix = 'iss/'
+tgt_bucket='<>'
 tgt_bucket_prefix = 'iss/'
 s3_resource = boto3.resource('s3')
 s3_client = boto3.client('s3')
@@ -21,7 +26,7 @@ def get_list_of_file(path_prefix):
         print("** get_list_of_file(): started **")
         file_list = []
         for each_obj in bucket.objects.filter(Prefix=path_prefix):
-            if '.csv' in each_obj.key:
+            if '.txt' in each_obj.key:
                 file_path = each_obj.key
                 print("File Path: " + str(file_path))
                 file_name = file_path.split("/")[-1]
@@ -42,7 +47,7 @@ def file_exist(path_prefix):
     print("current_date:", current_date)
     file_list = ['person', 'acom_holdout']
     for file in file_list:
-        file_name = f'{file}_{current_date}.csv'
+        file_name = f'{file}_{current_date}.txt'
         if file_name in lst:
             print(f'Yes exist... {file_name}')
             read_src_s3(file_name, file)
@@ -51,7 +56,7 @@ def file_exist(path_prefix):
     print("** file_exist(): completed **")
 def read_src_s3(file_name, file):
     try:
-        print("*****Inside fetchValidEvents() function*****")
+        print("** read_src_s3(): started **")
         srcFullPath=f's3a://{src_bucket}/{src_bucket_prefix}{file_name}'
         file_name = srcFullPath.split("/")[-1]
         print("FileName: " + str(file_name))
@@ -64,11 +69,10 @@ def read_src_s3(file_name, file):
         day = getTimestamp[6:8:1]
         print(day)
         print("Source S3 Path : " + str(srcFullPath))
-        df = spark.read.format("csv") \
-            .option("delimiter", ",") \
-            .option("inferSchema", "false") \
-            .option("quote", "") \
-            .load(srcFullPath)
+        df = spark.read.option("header", "true") \
+            .option("delimiter", "|") \
+            .option("inferSchema", "true") \
+            .csv(srcFullPath)
         df.write.format("parquet").mode("overwrite").save(
             f"s3a://{tgt_bucket}/{tgt_bucket_prefix}/{file}/year={year}/month={month}/day={day}")
     except Exception as e:
